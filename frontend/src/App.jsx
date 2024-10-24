@@ -1,16 +1,15 @@
-import { Button } from "@/components/ui/button";
+//import { Button } from "@/components/ui/button";
 import BookItemList from "./custom_components/BookItemList";
 import BookForm from "./custom_components/BookForm";
 
 function App() {
   return (
-    <>
-      <h1 className="text-6xl">Set Up</h1>
-      <p className="text-3xl">Just testing</p>
-      <Button>Click me</Button>
-      <BookItemList />
-      <BookForm />
-    </>
+    <div className="min-h-screen bg-blue-900 text-blue-100 p-8">
+      <div className="max-w-md mx-auto">
+        <BookItemList />
+        <BookForm />
+      </div>
+    </div>
   );
 }
 

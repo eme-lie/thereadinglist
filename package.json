@@ -4,7 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "dotenv -e backend/.env -- node backend/server.js",
+    "server": "dotenv -e backend/.env -- nodemon backend/server.js",
+    "client": "dotenv -e frontend/.env -- npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +24,7 @@
     "npm": "^10.9.0"
   },
   "devDependencies": {
+    "dotenv-cli": "^7.4.2",
     "nodemon": "^3.1.7"
   }
 }

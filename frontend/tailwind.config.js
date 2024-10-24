@@ -45,22 +45,6 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
-        // Light Mode Colors
-        primary_light: "#3935FE",
-        border_light: "#EAEAEA",
-        text_light: "#DDDDDD",
-        background_light: "#FFFFFF",
-        background_alt_light: "#F6F6F6",
-        background_alt_light1: "#D5D4FF",
-
-        // Dark Mode Colors
-        primary_dark: "#5C5AFD",
-        background_dark: "#0C0C28",
-        border_dark: "#EAEAEA",
-        text_dark: "#FFFFFF",
-        background_alt_dark: "#212241",
-        background_alt_dark1: "#18184D",
-
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

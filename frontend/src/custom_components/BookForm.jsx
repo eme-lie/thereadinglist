@@ -1,20 +1,57 @@
-import { Button } from "@/components/ui/button";
+import axios from "axios";
+import React, { useState } from "react";
 
 const BookForm = () => {
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+
+  const addBook = async () => {
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4000/api/reading-list",
+        {
+          title,
+          author,
+        }
+      );
+      console.log("Book added:", data);
+    } catch (error) {
+      console.error("Error adding book:", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title && author) {
+      addBook();
+      setTitle("");
+      setAuthor("");
+    }
+  };
+
   return (
-    <div>
-      <form>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input type="text" id="title" name="title" />
-        </div>
-        <div>
-          <label htmlFor="author">Author</label>
-          <input type="text" id="author" name="author" />
-        </div>
-        <Button>Add Book</Button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit} className="mt-4">
+      <input
+        type="text"
+        placeholder="Book title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className="w-full p-2 mb-2 bg-blue-700 text-blue-100 placeholder-blue-300 rounded"
+      />
+      <input
+        type="text"
+        placeholder="Author"
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+        className="w-full p-2 mb-2 bg-blue-700 text-blue-100 placeholder-blue-300 rounded"
+      />
+      <button
+        type="submit"
+        className="w-full p-2 bg-blue-500 text-blue-100 rounded hover:bg-blue-600 transition-colors"
+      >
+        Add book
+      </button>
+    </form>
   );
 };
 
