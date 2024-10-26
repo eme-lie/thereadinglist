@@ -83,7 +83,7 @@ export const getReadingListItem = async (req, res) => {
 
 export const deleteReadingListItem = async (req, res) => {
   // Extract the id parameter from the request
-  const { id } = req.params;
+  const { id } = req.body;
 
   // Validate the id parameter
   if (!id) {
@@ -93,7 +93,7 @@ export const deleteReadingListItem = async (req, res) => {
 
   try {
     // Attempt to delete the reading list item by id from the database
-    const deletedItem = await ReadingList.findByIdAndRemove(id);
+    const deletedItem = await ReadingList.findByIdAndDelete(id);
 
     // Check if the reading list item was found and deleted
     if (!deletedItem) {

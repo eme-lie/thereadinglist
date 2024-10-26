@@ -16,7 +16,7 @@ router.get("/", getReadingListItems);
 
 router.get("/:id", getReadingListItem);
 
-router.delete("/:id", deleteReadingListItem);
+router.delete("/", deleteReadingListItem);
 
 router.patch("/:id", updateReadingListItem);
 

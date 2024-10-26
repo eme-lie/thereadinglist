@@ -1,9 +1,10 @@
 import BookItem from "./BookItem";
-import { useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
+import { BookContext } from "@/context/BookContext";
 
 const BookItemList = () => {
-  const [books, setBooks] = useState([]);
+  const { state: books, dispatch } = useContext(BookContext);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -11,7 +12,7 @@ const BookItemList = () => {
         const { data } = await axios.get(
           "http://localhost:4000/api/reading-list"
         );
-        setBooks(data);
+        dispatch({ type: "GET_BOOKS", books: data });
         console.log("Books:", books);
       } catch (error) {
         console.error("Error fetching books:", error);
@@ -22,7 +23,7 @@ const BookItemList = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">Ninja Reading List</h1>
+      <h1 className="text-3xl font-bold mb-4">Emelie's Reading List</h1>
       <p className="mb-4">
         Currently you have {books.length} book{books.length === 1 ? "" : "s"} to
         get through...
@@ -36,6 +37,7 @@ const BookItemList = () => {
                 key={book._id}
                 author={book.author}
                 title={book.title}
+                _id={book._id}
               />
             )
           )

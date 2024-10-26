@@ -4,8 +4,25 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useContext } from "react";
+import { BookContext } from "@/context/BookContext";
+import axios from "axios";
 
-const BookItem = ({ author, title }) => {
+const BookItem = ({ author, title, _id }) => {
+  const { dispatch } = useContext(BookContext);
+
+  const deleteBook = async () => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:4000/api/reading-list`,
+        { data: { id: _id } }
+      );
+      console.log("Book deleted:", data);
+      dispatch({ type: "REMOVE_BOOK_ITEM", id: _id });
+    } catch (error) {
+      console.error("Error deleting book:", error);
+    }
+  };
   return (
     <div className="bg-blue-800 p-4 mb-2 rounded-lg flex justify-between items-center">
       <div>
@@ -21,7 +38,9 @@ const BookItem = ({ author, title }) => {
           <PopoverContent>
             <div>
               <p className="p-2">Update</p>
-              <p className="p-2">Delete</p>
+              <p className="p-2" onClick={deleteBook}>
+                Delete
+              </p>
             </div>
           </PopoverContent>
         </Popover>

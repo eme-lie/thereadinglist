@@ -1,9 +1,11 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { BookContext } from "@/context/BookContext";
 
 const BookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const { dispatch } = useContext(BookContext);
 
   const addBook = async () => {
     try {
@@ -15,6 +17,7 @@ const BookForm = () => {
         }
       );
       console.log("Book added:", data);
+      dispatch({ type: "ADD_BOOK_ITEM", bookItem: data });
     } catch (error) {
       console.error("Error adding book:", error);
     }
